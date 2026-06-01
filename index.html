@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MEDIA TRI GO YUK!</title>
+
+    <link rel="icon" type="image/jpeg" href="logo.png">
+        
+    <style>
+    .fadeOutIntro{
+        opacity:0;
+    }
+
+    #introVideo{
+        position:fixed;
+        top:0;
+        left:0;
+        width:100vw;
+        height:100vh;
+        object-fit:cover;
+        z-index:10000;
+        opacity:1;
+        transition:opacity 1s ease;
+    }
+
+    #clickText{
+        position:fixed;
+        bottom:80px;
+        left:50%;
+        transform:translateX(-50%);
+        color:white;
+        font-size:30px;
+        font-weight:bold;
+        z-index:15000;
+        opacity:0;
+        transition:opacity .3s ease;
+        text-shadow:0 0 15px rgba(255,255,255,.8);
+        animation:melayang 2s infinite ease-in-out;
+    }
+
+    #clickText{
+        position:fixed;
+        bottom:80px;
+        left:50%;
+        transform:translateX(-50%);
+        font-family:'Trebuchet MS', sans-serif;
+        font-size:34px;
+        font-weight:800;
+        letter-spacing:1px;
+        color:white;
+        opacity:0;
+        transition:opacity .3s ease;
+        z-index:15000;
+        text-shadow:
+            0 0 10px rgba(255,255,255,.8),
+            0 0 20px rgba(255,255,255,.5);
+        animation:melayang 2s ease-in-out infinite;
+    }
+
+    @keyframes melayang{
+        0%{transform:translateX(-50%) translateY(0);}
+        50%{transform:translateX(-50%) translateY(-12px);}
+        100%{transform:translateX(-50%) translateY(0);}
+    }
+
+    #petunjukPage{
+        position:fixed;
+        inset:0;
+        z-index:18000;
+        display:none;
+        justify-content:center;
+        align-items:center;
+        background:black;
+    }
+
+    #petunjukPage img{
+        width:100vw;
+        height:100vh;
+        object-fit:cover;
+    }
+
+    #btnPetunjukNext{
+        position:absolute;
+        bottom:50px;
+        right:50px;
+        padding:18px 45px;
+        font-size:24px;
+        font-weight:bold;
+        color:white;
+        border:none;
+        border-radius:50px;
+        cursor:pointer;
+        background:linear-gradient(
+            135deg,
+            #2E7D32,
+            #4CAF50,
+            #81C784
+        );
+
+        box-shadow:
+            0 8px 20px rgba(46,125,50,.4);
+        opacity:0;
+        transition:
+            opacity .5s ease,
+            transform .3s ease;
+    }
+
+    #btnPetunjukNext.show{
+        opacity:1;
+    }
+
+    #btnPetunjukNext:hover{
+        transform:scale(1.08);
+    }
+
+    body.lock-scroll{
+        overflow: hidden;
+        height: 100vh;
+    }
+
+    #videoMateri{
+        position:fixed;
+        top:0;
+        left:0;
+        width:100vw;
+        height:100vh;
+        object-fit:cover;
+        display:block;
+        margin:0;
+        border-radius:0;
+        opacity:0;
+        transition:opacity 1.5s ease;
+        z-index:1;
+}
+.showMateri{
+    opacity:1 !important;
+}
+
+.fadeOut{
+    opacity: 0;
+}
+
+#blackScreen{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background:black;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.8s ease;
+    z-index:9000;
+}
+
+#blackScreen.show{
+    opacity:1;
+}
+
+    #nextContainer{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+
+    opacity:0;
+    visibility:hidden;
+
+    background:url("logo.png")center center/cover no-repeat;
+
+    transition:opacity 1.2s ease;
+    z-index:20000;
+}
+
+#nextContainer::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+
+    background:rgba(0,0,0,0.35);
+}
+
+#nextContainer.show{
+    opacity:1;
+    visibility:visible;
+}
+
+#nextContainer.show #btnNext{
+    transform:translateY(0);
+}
+
+#btnNext{
+    padding:18px 45px;
+    font-size:26px;
+    font-weight:bold;
+    color:white;
+    cursor:pointer;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,#2E7D32,#4CAF50,#81C784);
+    box-shadow:0 8px 20px rgba(46,125,50,0.4);
+    transform:translateY(40px);
+    transition:all 1s ease;
+    position:relative;
+    z-index:2;
+}
+
+#btnNext:hover{
+    transform:translateY(0) scale(1.08);
+}
+    </style>
+</head>
+<body>
+<video id="introVideo"
+       autoplay
+       controls
+       controlsList="nodownload noplaybackrate nofullscreen"
+       disablePictureInPicture>
+    <source src="video opening.mp4" type="video/mp4">
+</video>
+
+<div id="clickText">
+    ✨ KLIK DIMANA SAJA UNTUK MEMULAI PETUALANGAN ✨
+</div>
+
+<div id="petunjukPage">
+    <img src="petunjuk penggunaan.jpeg" alt="Petunjuk Penggunaan">
+
+    <button id="btnPetunjukNext">
+        🚀 LANJUT KE MATERI 🚀
+    </button>
+</div>
+
+<video id="videoMateri"
+       controls
+       controlsList="nodownload noplaybackrate nofullscreen"
+       disablePictureInPicture>
+    <source src="video ict fix kompresi.mp4" type="video/mp4">
+</video>
+
+<div id="blackScreen"></div>
+
+<div id="nextContainer">
+    <button id="btnNext"
+        onclick="window.location.href='https://sivaalma.my.canva.site/salinan-dari-1-5-salinan'">
+        🌿 NEXT ADVENTURE 🌿
+    </button>
+</div>
+
+<script>
+const video = document.getElementById("videoMateri");
+const container = document.getElementById("nextContainer");
+const intro = document.getElementById("introVideo");
+const clickText = document.getElementById("clickText");
+const petunjukPage = document.getElementById("petunjukPage");
+const btnPetunjukNext = document.getElementById("btnPetunjukNext");
+
+function stopScroll(e){
+    e.preventDefault();
+}
+
+window.addEventListener("wheel", stopScroll, {passive:false});
+window.addEventListener("touchmove", stopScroll, {passive:false});
+
+let selesai1Kali = false;
+
+intro.loop = true;
+
+intro.addEventListener("timeupdate", function(){
+
+    if(
+        !selesai1Kali &&
+        intro.currentTime >= intro.duration - 0.2
+    ){
+        selesai1Kali = true;
+
+        clickText.classList.add("show");
+    }
+});
+
+document.addEventListener("click", function(){
+
+    if(!selesai1Kali) return;
+
+    intro.pause();
+    intro.style.display = "none";
+
+    clickText.style.display = "none";
+
+    petunjukPage.style.display = "flex";
+
+    setTimeout(() => {
+        btnPetunjukNext.classList.add("show");
+    }, 10000);
+
+}, {once:true});
+
+btnPetunjukNext.addEventListener("click", function(){
+
+    petunjukPage.style.display = "none";
+
+    video.classList.add("showMateri");
+    video.play();
+
+});
+
+video.addEventListener("ended", function(){
+
+    // video perlahan menghilang
+    video.classList.add("fadeOut");
+
+    setTimeout(() => {
+
+        // sembunyikan video
+        video.style.display = "none";
+
+        // tampilkan tombol dengan animasi
+        container.classList.add("show");
+
+    }, 1500);
+
+});
+
+</script>
+
+</body>
+</html>
